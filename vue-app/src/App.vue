@@ -1,47 +1,64 @@
 <script>
-import ExampleComponent from './components/ExampleComponent.vue'
+import heroJson from './hero.json'
+import monsterJson from './monsterDeck.json'
+import itemJson from './itemDeck.json'
+import * as math from 'mathjs';
+
+// [import components here]
+// remember to register them in the components property below!
 
 export default {
   components: {
-    ExampleComponent
   },
   data() {
     return {
-      heading: "",
-      content: "... but the first step is not always simple."
+      hero: heroJson,
+      itemDeck: itemJson,
+      monsterDeck: monsterJson
     }
   },
   methods: {
+    drawMonster() {
+      let monsterCard = this.drawCard(this.monsterDeck)
+      if (monsterCard) {
+        let randomAction = math.randomInt(0, monsterCard.actions.length - 1)
+        let action = monsterCard.actions[randomAction]
+        this.hero[action.heroStatAffected] = math.evaluate(action.expression, this.hero)
+      } 
+    },
+    drawItem() {
+      let itemCard = this.drawCard(this.itemDeck)
+      if (itemCard) {
+        console.log("item", itemCard)
+        this.hero[itemCard.heroStatAffected] = math.evaluate(itemCard.expression, this.hero)
+      } 
+    },
+    drawCard(deck) {
+      if (deck.length !== 0) {
+        const randomIndex = math.randomInt(0, deck.length - 1);
+        const card = deck.splice(randomIndex, 1)[0];
+        return card;
+      } else {
+        // deck is empty! HANDLE IT!
+      }
+    }
   },
   computed: {
   },
   mounted() {
-    this.heading = "Every journey is simply a series of steps..."
   }
 }
 </script>
 
 <template>
   <header>
-    <h1>
-      {{ heading }}
-    </h1>
+    <h1>[Game Name Here]</h1>
   </header>
 
   <main>
-    <ExampleComponent :paragraph="content"/>
+    <!-- components here -->
   </main>
 
-  <footer>
-  </footer>
 </template>
 
-<style scoped>
-header {
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
-
-h1 {
-  color: #393939;
-}
-</style>
+<style scoped></style>
