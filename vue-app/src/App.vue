@@ -24,14 +24,20 @@ export default {
         let randomAction = math.randomInt(0, monsterCard.actions.length - 1)
         let action = monsterCard.actions[randomAction]
         this.hero[action.heroStatAffected] = math.evaluate(action.expression, this.hero)
-      } 
+        return monsterCard
+      } else {
+        return null
+      }
     },
     drawItem() {
       let itemCard = this.drawCard(this.itemDeck)
       if (itemCard) {
         console.log("item", itemCard)
         this.hero[itemCard.heroStatAffected] = math.evaluate(itemCard.expression, this.hero)
-      } 
+        return itemCard
+      } else {
+        return null
+      }
     },
     drawCard(deck) {
       if (deck.length !== 0) {
