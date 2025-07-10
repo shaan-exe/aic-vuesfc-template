@@ -10,6 +10,6 @@ Open VS Code's integrated terminal in the `vue-app` folder. (Easiest to just rig
 
 This will spin up a server running your Vue app on your local machine. Ctrl+click or navigate to the URL shown in the terminal to view your page, live updates, and the Vue debugger.
 
-## See Canvas for the assignment requirements!
-
 All of your Vue coding will be done in the `src` folder, but remember to give your page a real title in `index.html`, found in the `vue-app` root folder.
+
+### See Canvas for the assignment requirements!
